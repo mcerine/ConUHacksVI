@@ -1,9 +1,5 @@
 const APIController = (function() {
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
     const clientId = 'ADD YOUR CLIENT ID';
     const clientSecret = 'ADD YOUR CLIENT SECRET';
 
@@ -13,11 +9,7 @@ const APIController = (function() {
         const result = await fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
-<<<<<<< HEAD
                 'Content-Type' : 'application/x-www-form-urlencoded',
-=======
-                'Content-Type' : 'application/x-www-form-urlencoded', 
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
                 'Authorization' : 'Basic ' + btoa(clientId + ':' + clientSecret)
             },
             body: 'grant_type=client_credentials'
@@ -26,11 +18,7 @@ const APIController = (function() {
         const data = await result.json();
         return data.access_token;
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
     const _getGenres = async (token) => {
 
         const result = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_US`, {
@@ -45,11 +33,7 @@ const APIController = (function() {
     const _getPlaylistByGenre = async (token, genreId) => {
 
         const limit = 10;
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
         const result = await fetch(`https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token}
@@ -134,22 +118,14 @@ const UIController = (function() {
         createGenre(text, value) {
             const html = `<option value="${value}">${text}</option>`;
             document.querySelector(DOMElements.selectGenre).insertAdjacentHTML('beforeend', html);
-<<<<<<< HEAD
         },
-=======
-        }, 
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
 
         createPlaylist(text, value) {
             const html = `<option value="${value}">${text}</option>`;
             document.querySelector(DOMElements.selectPlaylist).insertAdjacentHTML('beforeend', html);
         },
 
-<<<<<<< HEAD
         // need method to create a track list group item
-=======
-        // need method to create a track list group item 
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
         createTrack(id, name) {
             const html = `<a href="#" class="list-group-item list-group-item-action list-group-item-light" id="${id}">${name}</a>`;
             document.querySelector(DOMElements.divSonglist).insertAdjacentHTML('beforeend', html);
@@ -162,28 +138,17 @@ const UIController = (function() {
             // any time user clicks a new song, we need to clear out the song detail div
             detailDiv.innerHTML = '';
 
-<<<<<<< HEAD
             const html =
             `
             <div class="row col-sm-12 px-0">
                 <img src="${img}" alt="">
-=======
-            const html = 
-            `
-            <div class="row col-sm-12 px-0">
-                <img src="${img}" alt="">        
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
             </div>
             <div class="row col-sm-12 px-0">
                 <label for="Genre" class="form-label col-sm-12">${title}:</label>
             </div>
             <div class="row col-sm-12 px-0">
                 <label for="artist" class="form-label col-sm-12">By ${artist}:</label>
-<<<<<<< HEAD
             </div>
-=======
-            </div> 
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
             `;
 
             detailDiv.insertAdjacentHTML('beforeend', html)
@@ -202,11 +167,7 @@ const UIController = (function() {
             this.inputField().playlist.innerHTML = '';
             this.resetTracks();
         },
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
         storeToken(value) {
             document.querySelector(DOMElements.hfToken).value = value;
         },
@@ -228,11 +189,7 @@ const APPController = (function(UICtrl, APICtrl) {
     // get genres on page load
     const loadGenres = async () => {
         //get the token
-<<<<<<< HEAD
         const token = await APICtrl.getToken();
-=======
-        const token = await APICtrl.getToken();           
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
         //store the token onto the page
         UICtrl.storeToken(token);
         //get the genres
@@ -246,7 +203,6 @@ const APPController = (function(UICtrl, APICtrl) {
         //reset the playlist
         UICtrl.resetPlaylist();
         //get the token that's stored on the page
-<<<<<<< HEAD
         const token = UICtrl.getStoredToken().token;
         // get the genre select field
         const genreSelect = UICtrl.inputField().genre;
@@ -258,19 +214,6 @@ const APPController = (function(UICtrl, APICtrl) {
         playlist.forEach(p => UICtrl.createPlaylist(p.name, p.tracks.href));
     });
 
-=======
-        const token = UICtrl.getStoredToken().token;        
-        // get the genre select field
-        const genreSelect = UICtrl.inputField().genre;       
-        // get the genre id associated with the selected genre
-        const genreId = genreSelect.options[genreSelect.selectedIndex].value;             
-        // ge the playlist based on a genre
-        const playlist = await APICtrl.getPlaylistByGenre(token, genreId);       
-        // create a playlist list item for every playlist returned
-        playlist.forEach(p => UICtrl.createPlaylist(p.name, p.tracks.href));
-    });
-     
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
 
     // create submit button click event listener
     DOMInputs.submit.addEventListener('click', async (e) => {
@@ -279,11 +222,7 @@ const APPController = (function(UICtrl, APICtrl) {
         // clear tracks
         UICtrl.resetTracks();
         //get the token
-<<<<<<< HEAD
         const token = UICtrl.getStoredToken().token;
-=======
-        const token = UICtrl.getStoredToken().token;        
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
         // get the playlist field
         const playlistSelect = UICtrl.inputField().playlist;
         // get track endpoint based on the selected playlist
@@ -292,11 +231,7 @@ const APPController = (function(UICtrl, APICtrl) {
         const tracks = await APICtrl.getTracks(token, tracksEndPoint);
         // create a track list item
         tracks.forEach(el => UICtrl.createTrack(el.track.href, el.track.name))
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
     });
 
     // create song selection click event listener
@@ -312,11 +247,7 @@ const APPController = (function(UICtrl, APICtrl) {
         const track = await APICtrl.getTrack(token, trackEndpoint);
         // load the track details
         UICtrl.createTrackDetail(track.album.images[2].url, track.name, track.artists[0].name);
-<<<<<<< HEAD
     });
-=======
-    });    
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
 
     return {
         init() {
@@ -328,8 +259,4 @@ const APPController = (function(UICtrl, APICtrl) {
 })(UIController, APIController);
 
 // will need to call a method to load the genres on page load
-<<<<<<< HEAD
 APPController.init();
-=======
-APPController.init();
->>>>>>> a749ed590bcd5c2b71e1d047c8c417b0c0553cee
