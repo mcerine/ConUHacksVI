@@ -2,3 +2,15 @@ body {
   background-image: url("images/aurabackground.jpg");
   background-size: 100%;
 }
+
+
+
+h1 {
+  width: 100%;
+  text-align: center;
+}
+
+form {
+  width: 100;
+  text-align: center;
+}
